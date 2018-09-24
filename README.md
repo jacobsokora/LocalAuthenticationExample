@@ -7,7 +7,11 @@ First things first, make sure you import LocalAuthentication at the top of your 
 
 From there it's as easy as creating an instance of LAContext, which handles all the user interaction for you as well as interfacing with the secure enclave where biometric and passcode information is stored.
 
-The first function you'll call is ```swift canEvaluatePolicy(_ policy: LAPolicy, error: NSErrorPointer) -> Bool``` which will tell you if authentication is possible in the current context. The first arugment is of type ```LAPolicy``` which is an enumeration with two cases, ```.deviceOwnerAuthentication``` or ```.deviceOwnerAuthenticationWithBiometrics``` the first of which will attempt to authenticate with biometrics if available and fall back to the user's passcode, the second of which will basically do the same thing but if biometric authentication is not available on the device this will fail instead of prompting for a passcode unlike the first.
+The first function you'll call is 
+```swift
+canEvaluatePolicy(_ policy: LAPolicy, error: NSErrorPointer) -> Bool
+```
+ which will tell you if authentication is possible in the current context. The first arugment is of type ```LAPolicy``` which is an enumeration with two cases, ```.deviceOwnerAuthentication``` or ```.deviceOwnerAuthenticationWithBiometrics``` the first of which will attempt to authenticate with biometrics if available and fall back to the user's passcode, the second of which will basically do the same thing but if biometric authentication is not available on the device this will fail instead of prompting for a passcode unlike the first.
 
 This function also takes an ```NSErrorPointer``` which will tell you what went wrong if the function returns false. While this seems like a new type you have to worry about it's just an alias for a pointer to an ```NSError``` object.
 
